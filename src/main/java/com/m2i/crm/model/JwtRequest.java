@@ -4,6 +4,7 @@ package com.m2i.crm.model;
  *
  * @author elouf
  */
+
 import java.io.Serializable;
 
 public class JwtRequest implements Serializable {

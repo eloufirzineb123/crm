@@ -1,4 +1,4 @@
-package com.m2i.crm.config;
+package com.m2i.crm.Configue;
 
 /**
  *

@@ -1,10 +1,11 @@
-package com.m2i.crm.config;
+package com.m2i.crm.Configue;
 
 /**
  *
  * @author elouf
  */
-
+import com.m2i.crm.model.JwtTokenUtil;
+import com.m2i.crm.service.JwtUserDetailsService;
 import java.io.IOException;
 
 import javax.servlet.FilterChain;
@@ -21,7 +22,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 
-import com.m2i.crm.service.JwtUserDetailsService;
 
 import io.jsonwebtoken.ExpiredJwtException;
 

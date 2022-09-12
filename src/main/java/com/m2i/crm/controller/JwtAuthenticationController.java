@@ -4,12 +4,9 @@ package com.m2i.crm.controller;
  *
  * @author elouf
  */
-import com.m2i.crm.config.JwtTokenUtil;
 import com.m2i.crm.model.JwtRequest;
 import com.m2i.crm.model.JwtResponse;
-import com.m2i.crm.service.JwtUserDetailsService;
-import java.util.Objects;
-
+import com.m2i.crm.model.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+
+import com.m2i.crm.model.UserDTO;
+import com.m2i.crm.service.JwtUserDetailsService;
 
 @RestController
 @CrossOrigin
@@ -42,12 +42,16 @@ public class JwtAuthenticationController {
 
 		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
-		final UserDetails userDetails = userDetailsService
-				.loadUserByUsername(authenticationRequest.getUsername());
+		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 
 		final String token = jwtTokenUtil.generateToken(userDetails);
 
 		return ResponseEntity.ok(new JwtResponse(token));
+	}
+
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
+		return ResponseEntity.ok(userDetailsService.save(user));
 	}
 
 	private void authenticate(String username, String password) throws Exception {
